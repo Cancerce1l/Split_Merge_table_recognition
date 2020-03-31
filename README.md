@@ -85,7 +85,7 @@ Here are some example:
 
 ## Images
 
-![](images/split_input.jpg)
+![](images/split_input.png)
 
 Fig1. Original image
 
@@ -93,7 +93,7 @@ Fig1. Original image
 
 Fig2. Split result
 
-![](images/merge_example.jpg)
+![](images/merge_example.png)
 
 Fig3. one Merge result.
 
