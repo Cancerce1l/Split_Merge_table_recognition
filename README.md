@@ -89,7 +89,7 @@ Here are some example:
 
 Fig1. Original image
 
-![](images/split_output.jpg)
+![](images/split_output.png)
 
 Fig2. Split result
 
