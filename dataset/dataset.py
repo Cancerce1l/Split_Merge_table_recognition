@@ -49,18 +49,25 @@ class ImageDataset(Dataset):
     id = self.ids[index]
     if self.suffix == '.npy':
       img = np.load(os.path.join(self.img_dir, id + self.suffix))
+      c, h, w = img.shape
+      new_h = int(self.scale * h) if int(
+        self.scale * h) > self.min_width else self.min_width
+      new_w = int(self.scale * w) if int(
+        self.scale * w) > self.min_width else self.min_width
+      img = np.array(
+        [cv2.resize(img[i], (new_w, new_h), interpolation=cv2.INTER_AREA) for i in
+         range(c)])
+      img_array = np.array(img) / 255.
     elif self.suffix == '.jpg':
       img = Image.open(os.path.join(self.img_dir, id + self.suffix))
       img = np.array(img)
-    c, h, w = img.shape
-    new_h = int(self.scale * h) if int(
-      self.scale * h) > self.min_width else self.min_width
-    new_w = int(self.scale * w) if int(
-      self.scale * w) > self.min_width else self.min_width
-    img = np.array(
-      [cv2.resize(img[i], (new_w, new_h), interpolation=cv2.INTER_AREA) for i in
-       range(c)])
-    img_array = np.array(img) / 255.
+      w, h = img.shape
+      new_h = int(self.scale * h) if int(
+        self.scale * h) > self.min_width else self.min_width
+      new_w = int(self.scale * w) if int(
+        self.scale * w) > self.min_width else self.min_width
+      img = cv2.resize(img, (new_w, new_h))
+      img_array = np.array([img]) / 255.
 
     if self.mode == 'merge':
       labels = self.labels_dict[id]

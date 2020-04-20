@@ -7,7 +7,7 @@ import torch
 from functools import reduce
 
 
-def bce_loss(pred, label):
+def bce_loss(pred, label, weights=None):
   """
   Loss function for Split model
   Args:

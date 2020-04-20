@@ -32,10 +32,10 @@ def train(opt, net):
     val_labels = json.load(f)
   val_img_dir = opt.val_img_dir
 
-  train_set = ImageDataset(dir_img, labels, opt.featureW, scale=opt.scale)
+  train_set = ImageDataset(dir_img, labels, opt.featureW, scale=opt.scale, suffix='.jpg')
   train_loader = DataLoader(train_set, batch_size=opt.batch_size, shuffle=True)
 
-  val_set = ImageDataset(val_img_dir, val_labels, opt.featureW, scale=opt.scale)
+  val_set = ImageDataset(val_img_dir, val_labels, opt.featureW, scale=opt.scale, suffix='.jpg')
   val_loader = DataLoader(val_set, batch_size=opt.batch_size, shuffle=False)
 
   print('Data loaded!')
@@ -109,7 +109,7 @@ if __name__ == '__main__':
 
   opt = parser.parse_args()
 
-  net = SplitModel(3)
+  net = SplitModel(1)
   if opt.gpu:
     cudnn.benchmark = True
     cudnn.deterministic = True
